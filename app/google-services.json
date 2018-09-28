@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "784649327790",
+    "firebase_url": "https://mp3mdbsocials.firebaseio.com",
+    "project_id": "mp3mdbsocials",
+    "storage_bucket": "mp3mdbsocials.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784649327790:android:1bc7c9ed2adde093",
+        "android_client_info": {
+          "package_name": "com.mao.mp3_mdbsocials"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784649327790-p7j4l1pj7fnuggmuc6p68r18eql1fi05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mao.mp3_mdbsocials",
+            "certificate_hash": "e2582209c8004967f0dc77687221fb6479472fbc"
+          }
+        },
+        {
+          "client_id": "784649327790-rcd4gc93ifi2kf5b38q31gh2cpg6hcen.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaQjP3oebPHBCpz1b6MNlBHPXklAL12As"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784649327790-rcd4gc93ifi2kf5b38q31gh2cpg6hcen.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
