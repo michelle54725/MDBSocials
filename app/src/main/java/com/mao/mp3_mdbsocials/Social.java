@@ -7,13 +7,13 @@ import java.net.URI;
 public class Social implements Serializable {
     String name;
     String desc;
-    long date;
+    String date;
 
     String key; //key of the Social/name of the image thats in the Storage/Database
 
     public Social() { }
 
-    public Social (String name, String desc, long date, String key) {
+    public Social (String name, String desc, String date, String key) {
         this.name = name;
         this.desc = desc;
         this.date = date;
@@ -44,11 +44,11 @@ public class Social implements Serializable {
         this.desc = desc;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

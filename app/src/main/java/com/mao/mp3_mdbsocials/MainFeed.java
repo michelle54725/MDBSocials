@@ -22,9 +22,7 @@ public class MainFeed extends AppCompatActivity {
 
     final int REQUEST_CODE = 123;
 
-    //TODO: get data from Firebase, display with SocialsAdapter
     final ArrayList<Social> socials = new ArrayList<>();
-    final SocialsAdapter adapter = new SocialsAdapter(getApplicationContext(), socials);
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("/Socials");
 
 
@@ -32,7 +30,6 @@ public class MainFeed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_feed);
-
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
@@ -46,6 +43,7 @@ public class MainFeed extends AppCompatActivity {
                 startActivity(new Intent(MainFeed.this, CreateEvent.class));
             }
         });
+        // TODO: tapping a cell leads to detail screen
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -54,6 +52,7 @@ public class MainFeed extends AppCompatActivity {
                 // This method is called once with the initial value and again whenever data at this location is updated.
                 socials.clear(); //keeps ArrayList and clears rather than make new one
 
+                // TODO: order socials by newest to oldest (use Timestamps from Firebase)
                 for (DataSnapshot childsnap : dataSnapshot.getChildren()) {
                     socials.add(childsnap.getValue(Social.class)); //cannot do this if class not Serializable
                 }

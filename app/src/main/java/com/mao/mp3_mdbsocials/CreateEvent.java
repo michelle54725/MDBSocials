@@ -23,6 +23,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CreateEvent extends AppCompatActivity {
     EditText name;
@@ -39,7 +43,6 @@ public class CreateEvent extends AppCompatActivity {
         desc = findViewById(R.id.descField);
         date = findViewById(R.id.dateField);
         pic = findViewById(R.id.pictureField);
-
 
         findViewById(R.id.uploadButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,10 +75,11 @@ public class CreateEvent extends AppCompatActivity {
 
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 //make Social object to store in myRef
+
                                 Social mSocial = new Social(
                                         name.getText().toString(),
                                         desc.getText().toString(),
-                                        Long.valueOf(date.getText().toString()),
+                                        getDate(date.getText().toString()),
                                         mKey);
                                 //store in Database
                                 myRef.child(mKey).setValue(mSocial);
@@ -91,6 +95,18 @@ public class CreateEvent extends AppCompatActivity {
                         });
             }
         }
-
     }
+
+    public String getDate(String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); // Make sure user insert date into edittext in this format.
+        Date dateObject = null;
+        try {
+            dateObject = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        DateFormat dateFormatISO8601 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormatISO8601.format(dateObject);
+    }
+
 }

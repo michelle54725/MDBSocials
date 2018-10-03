@@ -2,6 +2,7 @@ package com.mao.mp3_mdbsocials;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -35,17 +43,31 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        Social social = data.get(position);
-        holder.nameView.setText(social.name);
+    public void onBindViewHolder(@NonNull final CustomViewHolder holder, int position) {
+        final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        //TODO: use Glide to set img; get image URL via key?
-        RequestOptions myOptions = new RequestOptions()
-//                .error(R.drawable.ic_error_black_24dp)
-                .override(100, 100);
-        Glide.with(context)
-                .load(social.key)
-                .apply(myOptions).into(holder.picView);
+        Social social = data.get(position);
+        holder.nameView.setText(social.getName());
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            holder.emailView.setText(user.getEmail());
+        } else {
+            holder.emailView.setText("N/A");
+        }
+
+        mStorageRef.child(social.key).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String url = uri.toString();
+                RequestOptions myOptions = new RequestOptions()
+                .error(R.drawable.ic_android_black_24dp)
+                        .override(100, 100);
+                Glide.with(context)
+                        .load(url)
+                        .apply(myOptions).into(holder.picView);
+            }
+        });
     }
 
 
