@@ -1,19 +1,12 @@
 package com.mao.mp3_mdbsocials;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -58,9 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseUser user = null;
         switch (b.getId()) {
             case R.id.create_account_button:
-                user = FirebaseUtils.createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                user = FirebaseUtils.createAccount(MainActivity.this, mEmailField.getText().toString(), mPasswordField.getText().toString());
             case R.id.sign_in_button:
-                user = FirebaseUtils.signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                user = FirebaseUtils.signIn(MainActivity.this, mEmailField.getText().toString(), mPasswordField.getText().toString());
         }
         if (user == null) {
             Toast.makeText(MainActivity.this, "Invalid input. Please try again.",

@@ -63,18 +63,14 @@
                 app:layout_constraintHorizontal_bias="0.859"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/eventInterested"
-                android:layout_width="44dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:ems="10"
-                android:inputType="number"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="0"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/Interested" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

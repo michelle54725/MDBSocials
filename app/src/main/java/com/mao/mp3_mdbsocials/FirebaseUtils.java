@@ -1,5 +1,7 @@
 package com.mao.mp3_mdbsocials;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -15,7 +17,7 @@ public class FirebaseUtils {
     private static FirebaseUser user;
 
 
-    static FirebaseUser createAccount(String email, String password) {
+    static FirebaseUser createAccount(Context context, String email, String password) {
         mAuth = FirebaseAuth.getInstance();
         user = null;
         Log.d(TAG, "createAccount:" + email);
@@ -25,9 +27,8 @@ public class FirebaseUtils {
             return user;
         }
 
-        //TODO: deal with "FirebaseUtils can't be referenced from static context
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -41,13 +42,13 @@ public class FirebaseUtils {
         return user;
     }
 
-    static FirebaseUser signIn(String email, String password) {
+    static FirebaseUser signIn(Context context, String email, String password) {
         mAuth = FirebaseAuth.getInstance();
         Log.d(TAG, "signIn:" + email);
 
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {

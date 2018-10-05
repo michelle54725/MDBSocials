@@ -2,15 +2,12 @@ package com.mao.mp3_mdbsocials;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +16,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -50,6 +45,7 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
 
         social = data.get(position);
         holder.nameView.setText(social.getName());
+        holder.interestView.setText(String.valueOf(social.getInterested()));
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -83,7 +79,7 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
     class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView nameView;
         TextView emailView;
-        EditText interestView;
+        TextView interestView;
         ImageView picView;
 
 
@@ -93,6 +89,7 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
             this.emailView = view.findViewById(R.id.eventEmail);
             this.interestView = view.findViewById(R.id.eventInterested);
             this.picView = view.findViewById(R.id.eventPicture);
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

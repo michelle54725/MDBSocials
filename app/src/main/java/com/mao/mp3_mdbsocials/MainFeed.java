@@ -19,11 +19,8 @@ public class MainFeed extends AppCompatActivity {
     RecyclerView mRecyclerView;
     LinearLayoutManager mLinearLayoutManager;
 
-    final int REQUEST_CODE = 123;
-
     final ArrayList<Social> socials = new ArrayList<>();
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("/Socials");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

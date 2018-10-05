@@ -1,7 +1,6 @@
 package com.mao.mp3_mdbsocials;
 
 import java.io.Serializable;
-import java.net.URI;
 
 //Serializable allows object -> string (Firebase will do smth). need getter and setters
 public class Social implements Serializable {
