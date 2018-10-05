@@ -8,16 +8,43 @@ public class Social implements Serializable {
     String name;
     String desc;
     String date;
-
     String key; //key of the Social/name of the image thats in the Storage/Database
+    String email;
+    public int interested;
 
     public Social() { }
 
-    public Social (String name, String desc, String date, String key) {
+    public Social (String name, String desc, String date, String key, String email) {
         this.name = name;
         this.desc = desc;
         this.date = date;
         this.key = key;
+        this.email = email;
+        this.interested = 0;
+    }
+
+    public int getInterested() {
+        return interested;
+    }
+
+    public void setInterested(int interested) {
+        this.interested = interested;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -26,14 +53,6 @@ public class Social implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getkey() {
-        return key;
-    }
-
-    public void setkey(String key) {
-        this.key = key;
     }
 
     public String getDesc() {

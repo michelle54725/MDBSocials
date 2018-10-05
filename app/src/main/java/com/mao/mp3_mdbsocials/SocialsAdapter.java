@@ -1,6 +1,7 @@
 package com.mao.mp3_mdbsocials;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -29,6 +30,7 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
 
     private Context context;
     private ArrayList<Social> data;
+    Social social;
 
     SocialsAdapter(Context context, ArrayList<Social> data) {
         this.context = context;
@@ -46,7 +48,7 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
     public void onBindViewHolder(@NonNull final CustomViewHolder holder, int position) {
         final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        Social social = data.get(position);
+        social = data.get(position);
         holder.nameView.setText(social.getName());
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,7 +72,6 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
         });
     }
 
-
     @Override
     public int getItemCount() {
         return data.size();
@@ -92,6 +93,14 @@ public class SocialsAdapter extends RecyclerView.Adapter<SocialsAdapter.CustomVi
             this.emailView = view.findViewById(R.id.eventEmail);
             this.interestView = view.findViewById(R.id.eventInterested);
             this.picView = view.findViewById(R.id.eventPicture);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent detailIntent = new Intent(context, DetailActivity.class);
+                    detailIntent.putExtra("socialKey", social.key);
+                    context.startActivity(detailIntent);
+                }
+            });
         }
 
     }

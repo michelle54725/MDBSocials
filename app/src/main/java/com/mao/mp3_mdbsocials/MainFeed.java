@@ -1,11 +1,10 @@
 package com.mao.mp3_mdbsocials;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -43,16 +42,17 @@ public class MainFeed extends AppCompatActivity {
                 startActivity(new Intent(MainFeed.this, CreateEvent.class));
             }
         });
-        // TODO: tapping a cell leads to detail screen
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                // TODO: order socials by newest to oldest
+                myRef.orderByChild("timestamp");
+
                 // This method is called once with the initial value and again whenever data at this location is updated.
                 socials.clear(); //keeps ArrayList and clears rather than make new one
 
-                // TODO: order socials by newest to oldest (use Timestamps from Firebase)
                 for (DataSnapshot childsnap : dataSnapshot.getChildren()) {
                     socials.add(childsnap.getValue(Social.class)); //cannot do this if class not Serializable
                 }

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,6 +35,7 @@ public class CreateEvent extends AppCompatActivity {
     EditText desc;
     EditText date;
     ImageView pic;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,13 @@ public class CreateEvent extends AppCompatActivity {
         desc = findViewById(R.id.descField);
         date = findViewById(R.id.dateField);
         pic = findViewById(R.id.pictureField);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            email = user.getEmail();
+        } else {
+            email = "N/A";
+        }
 
         findViewById(R.id.uploadButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,12 +85,11 @@ public class CreateEvent extends AppCompatActivity {
 
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 //make Social object to store in myRef
-
                                 Social mSocial = new Social(
                                         name.getText().toString(),
                                         desc.getText().toString(),
                                         getDate(date.getText().toString()),
-                                        mKey);
+                                        mKey, email);
                                 //store in Database
                                 myRef.child(mKey).setValue(mSocial);
                                 finish();
